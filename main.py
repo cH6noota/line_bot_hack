@@ -30,7 +30,6 @@ def callback():
 def handle_message(event):
     texx=str(event)
     new = json.loads(texx)
-
     #repl ユーザid　取得
     line_user_id = new["source"]["userId"]
     app_id = id_check_func(line_user_id)
@@ -45,6 +44,7 @@ def handle_post(event):
     new = json.loads(texx)
     date= new["postback"]["params"]["date"]
     line_user_id=new["source"]["userId"]
+    #時刻と場所から今の予約情報をメッセージに
     #show_database(get_date)
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=texx))
 
