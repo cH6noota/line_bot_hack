@@ -43,9 +43,12 @@ def handle_message(event):
 def handle_post(event):
     texx=str(event)
     new = json.loads(texx)
-    get_date= new ["postback"]["params"]["datetime"]
+    get_date= new["postback"]["params"]["datetime"].split("T")
+    date=get_date[0]
+    time_data=get_date[1]
+    line_user_id=new["source"]["userId"]
 
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=get_date))
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=date+time_data))
 
     
 if __name__=="__main__":
