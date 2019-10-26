@@ -7,6 +7,7 @@ import json
 from funcs import id_check_func ,talk_func ,show_database,csv_date,db_write
 import pandas as pd
 import requests
+import datetime
 
 app=Flask(__name__)
 #環境変数の取得
@@ -63,6 +64,9 @@ def handle_post(event):
 
         line_user_id=new["source"]["userId"]
         tt=new["postback"]["params"]["time"]
+        tt = datetime.datetime.strptime(tt, '%H:%M').strftime('%H:00')
+
+
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
         date =pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[1]
         #DB 書き込み
