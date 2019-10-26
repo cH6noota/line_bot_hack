@@ -143,7 +143,7 @@ def db_write (line_user_id, place ,date,tt):
     try:
         with conn.cursor() as cursor:
             sql = "INSERT INTO pre_reserve (user_id,  place, res_date,res_time) VALUES (%s, %s, %s, %s)"
-            cursor.execute(sql, (a, b, c, d))
+            cursor.execute(sql, (line_user_id, place, date, tt))
         conn.commit()
     finally:
         conn.close()
