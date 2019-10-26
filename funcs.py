@@ -27,4 +27,11 @@ def talk_func(appUserId , message):
 
     r = requests.post(url,headers=header, json=body)
     data = json.loads(r.text)["systemText"]['expression']
-    return data
+    data=data.split("%%")
+    send=""
+    for i in data:
+        if send=="":
+            send=send+i
+        else:
+            send=send+"\n"+i
+    return send
