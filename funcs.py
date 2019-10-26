@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 import json
 import pymysql.cursors
-
+import datetime
 
 
 
@@ -86,15 +86,45 @@ def show_database(date,place):
             sql = "SELECT res_time FROM pre_reserve where res_date =" + date + " and place =" + place
             cursor.execute(sql, ())
             result = cursor.fetchall()
-            send=""
+            box=""
+            h_list=[]
+            ans =[]
             for r in result:
-                if send=="":
-                    send=r['res_time']
+                t = datetime.datetime.strptime(r['res_time'], '%H:%M:%S')
+                h_list.append(t.hour)
+            print(h_list)
+            #8時以降
+            for i in range(8,20):
+                flag=True
+                for j in h_list:
+                        if j==i+1:
+                                flag=False
+                if flag:
+                        x=str(i+1)+":00"
+                        ans.append(x)
+            for h in ans:
+                if box=="":
+                        box=box+h
                 else:
-                    send=send+"\n"+r['res_time']
-            return send
+                        box=box+"\n"+h
+            x={ "type": "text", "text": box}
+            return x
+    except:
+        ans=[]
+        for i in range(8,20):
+            x=str(i+1)+":00"
+            ans.append(x)
+        for h in ans:
+            if box=="":
+                box=box+h
+            else:
+                box=box+"\n"+h
+        x={ "type": "text", "text": box}
+        return x
+
     finally:
         conn.close()
+
 
     
 
