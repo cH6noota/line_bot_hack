@@ -4,7 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage,PostbackEvent
 import os
 import json
-from funcs import id_check_func ,talk_func ,show_database,csv_date
+from funcs import id_check_func ,talk_func ,show_database,csv_date,db_write
 import pandas as pd
 import requests
 
@@ -66,7 +66,8 @@ def handle_post(event):
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
         date =pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[1]
         #DB 書き込み
-        #db_write(line_user_id, place ,date,tt)
+        db_write(line_user_id, place ,date,tt)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="予約が完了しました！"))
 
 
     

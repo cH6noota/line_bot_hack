@@ -130,6 +130,24 @@ def csv_date(date, line_user_id):
     r = requests.get(url)
 
 
+def db_write (line_user_id, place ,date,tt):
+    conn = pymysql.connect(
+        host='153.126.197.42',
+        user='testuser',
+        password='knct0wireless',
+        db='kumamon5',
+        charset='utf8',
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+    try:
+        with conn.cursor() as cursor:
+            sql = "INSERT INTO pre_reserve (user_id,  place, res_date,res_time) VALUES (%s, %s, %s, %s)"
+            cursor.execute(sql, (a, b, c, d))
+        conn.commit()
+    finally:
+        conn.close()
+
 
 
 
