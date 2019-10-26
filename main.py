@@ -6,6 +6,7 @@ import os
 import json
 from funcs import id_check_func ,talk_func ,show_database
 import pandas as pd
+import requests
 
 app=Flask(__name__)
 #環境変数の取得
