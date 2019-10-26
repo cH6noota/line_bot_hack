@@ -4,9 +4,12 @@ import json
 import pymysql.cursors
 import datetime
 import pyotp
+import base64
 
-
-
+def create_otp(token):
+    data = base64.b32encode( token.encode("UTF-8") )
+    totp = pyotp.TOTP(data)
+    return totp.now() 
 def id_check_func(line_user_id):
     df = pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/user_data.csv",encoding="SHIFT-JIS")
     i=0
@@ -65,8 +68,7 @@ def talk_func(line_user_id, appUserId , message):
         return "non"
     elif data=="dbwrite":
         print("DB書き込み")
-        totp = pyotp.TOTP(line_user_id)
-        x=totp.now()
+        x=create_otp(line_user_id)
         url="https://api.line.me/v2/bot/message/push"
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
         head = {"Content-Type": "application/json","Authorization" :token }
