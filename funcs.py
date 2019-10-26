@@ -36,7 +36,7 @@ def talk_func(line_user_id, appUserId , message):
             else:
                 send=send+"\n"+i
         return send
-    if data=="場所_ok":
+    if data=="場所ok":
         #一時保管用 CSV
         url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&plase="+message
         r = requests.get(url)
