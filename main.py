@@ -5,6 +5,7 @@ from linebot.models import MessageEvent,TextMessage,TextSendMessage,PostbackEven
 import os
 import json
 from funcs import id_check_func ,talk_func ,show_database
+import pandas as pd
 
 app=Flask(__name__)
 #環境変数の取得
@@ -44,9 +45,9 @@ def handle_post(event):
     new = json.loads(texx)
     date= new["postback"]["params"]["date"]
     line_user_id=new["source"]["userId"]
-    place=""
+    place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv",encoding="SHIFT-JIS")
     #時刻と場所から今の予約情報をメッセージに
-    show_database(get_date)
+    show_database(date, place)
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=texx))
 
 

@@ -45,7 +45,7 @@ def talk_func(line_user_id, appUserId , message):
         return send
     if data=="場所ok":
         #一時保管用 CSV
-        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&plase=message"
+        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&plase="+message
         r = requests.get(url)
         url="https://api.line.me/v2/bot/message/push"
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
@@ -71,8 +71,8 @@ def talk_func(line_user_id, appUserId , message):
     else:
         return "テストok"
 
-def show_database(get_date):
-    date=get_date
+def show_database(date,plase):
+    print()
 
 
     
