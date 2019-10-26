@@ -4,7 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage,PostbackEvent
 import os
 import json
-from funcs import id_check_func ,talk_func ,show_database
+from funcs import id_check_func ,talk_func ,show_database,csv_date
 import pandas as pd
 import requests
 
@@ -47,6 +47,7 @@ def handle_post(event):
     if new["postback"]["data"]=="action=first":
         date= '"'+new["postback"]["params"]["date"]+'"'
         line_user_id=new["source"]["userId"]
+        csv_date(new["postback"]["params"]["date"], line_user_id)
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
         #時刻と場所から今の予約情報をメッセージに
         x3={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "時刻を選択して 下さい", "align": "center" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"Select date", "data":"action=second", "mode":"time" } } ] } } }
@@ -58,8 +59,13 @@ def handle_post(event):
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2,x3]})
         
     elif new["postback"]["data"]=="action=second":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=texx))
+
+        line_user_id=new["source"]["userId"]
+        tt=new["postback"]["params"]["time"]
+        place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
+
         #DB 書き込み
+        db_write()
 
 
     

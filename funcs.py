@@ -125,7 +125,11 @@ def show_database(date,place):
     finally:
         conn.close()
 
+def csv_date(date, line_user_id):
+    url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data2.php?line_user_id="+line_user_id+"&date="+date
+    r = requests.get(url)
 
-    
+
+
 
 
