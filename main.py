@@ -4,7 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage
 import os
 import json
-from funcs import id_check_func 
+from funcs import id_check_func ,talk_func 
 
 
 app=Flask(__name__)
@@ -31,10 +31,12 @@ def callback():
 def handle_message(event):
     texx=str(event)
     new = json.loads(texx)
-    text_1=id_check_func(new["source"]["userId"])
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text_1))
-    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["source"]["userId"]) )
-    get_mess=new["message"]["text"]
+    #repl ユーザid　取得
+    app_id = id_check_func(new["source"]["userId"])
+    # 会話を取得
+    send_message = talk_func(app_id,new["message"]["text"])
+
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_message))
 
     
 if __name__=="__main__":
