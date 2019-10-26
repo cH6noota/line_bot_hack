@@ -95,7 +95,7 @@ def show_database(date,place):
             return send
     finally:
         conn.close()"""
-    return plase
+    return place
 
 
     
