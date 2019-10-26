@@ -41,7 +41,7 @@ def talk_func(line_user_id, appUserId , message):
         url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&plase="+message
         r = requests.get(url)
         return "場所の入力が完了しました"
-    elif data=="時間_ok":
+    elif data=="ここで予約情報表示":
         url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&date="+message
         r = requests.get(url)
         return "時間"
