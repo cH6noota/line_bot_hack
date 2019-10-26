@@ -44,8 +44,9 @@ def handle_post(event):
     new = json.loads(texx)
     date= new["postback"]["params"]["date"]
     line_user_id=new["source"]["userId"]
+    place=""
     #時刻と場所から今の予約情報をメッセージに
-    #show_database(get_date)
+    show_database(get_date)
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text=texx))
 
 
