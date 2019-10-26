@@ -58,7 +58,7 @@ def handle_post(event):
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2,x3]})
         
     elif new["postback"]["data"]=="action=second":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=texx))
         #DB 書き込み
 
 
