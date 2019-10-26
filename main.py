@@ -6,7 +6,6 @@ import os
 import json
 from funcs import id_check_func ,talk_func 
 
-
 app=Flask(__name__)
 #環境変数の取得
 YOUR_CHANNEL_ACCESS_TOKEN="zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
@@ -30,13 +29,15 @@ def callback():
 @handler.add(MessageEvent,message=TextMessage)
 def handle_message(event):
     texx=str(event)
-    new = json.loads(texx)
+    
+    #new = json.loads(texx)
     #repl ユーザid　取得
-    app_id = id_check_func(new["source"]["userId"])
+    #line_user_id = new["source"]["userId"]
+    #app_id = id_check_func(line_user_id)
     # 会話を取得
-    send_message = talk_func(app_id,new["message"]["text"])
+    #send_message = talk_func(line_user_id,app_id,new["message"]["text"])
 
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_message))
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=texx))
 
     
 if __name__=="__main__":
