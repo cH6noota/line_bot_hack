@@ -90,7 +90,7 @@ def show_database(date,place):
             h_list=[]
             ans =[]
             for r in result:
-                t = datetime.datetime.strptime(r['res_time'], '%H:%M:%S')
+                t = datetime.datetime.strptime(r['res_time'], '%H:%M')
                 h_list.append(t.hour)
             print(h_list)
             #8時以降
@@ -109,18 +109,7 @@ def show_database(date,place):
                         box=box+"\n"+h
             x={ "type": "text", "text": box}
             return x
-    except:
-        ans=[]
-        for i in range(8,20):
-            x=str(i+1)+":00"
-            ans.append(x)
-        for h in ans:
-            if box=="":
-                box=box+h
-            else:
-                box=box+"\n"+h
-        x={ "type": "text", "text": box}
-        return x
+
 
     finally:
         conn.close()
