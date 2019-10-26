@@ -64,7 +64,7 @@ def talk_func(line_user_id, appUserId , message):
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
         head = {"Content-Type": "application/json","Authorization" :token } 
         #yを可変にする
-        y={ "type": "template", "altText": "this is a buttons template", "template": { "type": "buttons", "actions": [ { "type": "message", "label": "中央区", "text": "中央区" }, { "type": "message", "label": "北区", "text": "北区" }, { "type": "message", "label": "東区", "text": "東区" }, { "type": "message", "label": "南区", "text": "南区" } ], "title": "避難場所確認", "text": "避難場所を選択してください" } }
+        y={ "type": "template", "altText": "this is a buttons template", "template": { "type": "buttons", "actions": [ { "type": "message", "label": "中央区", "text": "21" }, { "type": "message", "label": "北区", "text": "21" }, { "type": "message", "label": "東区", "text": "21" }, { "type": "message", "label": "南区", "text": "21" } ], "title": "避難場所確認", "text": "避難場所を選択してください" } }
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[y]})
         return "non"
 
