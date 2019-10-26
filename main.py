@@ -47,8 +47,8 @@ def handle_post(event):
     line_user_id=new["source"]["userId"]
     place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
     #時刻と場所から今の予約情報をメッセージに
-    send=show_database(date, place)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send))
+    #send=show_database(date, place)
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text="aaa"))
 
 
     
