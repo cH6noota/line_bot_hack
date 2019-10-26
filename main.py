@@ -4,7 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage,PostbackEvent
 import os
 import json
-from funcs import id_check_func ,talk_func ,show_database
+from funcs import id_check_func ,talk_func 
 
 app=Flask(__name__)
 #環境変数の取得
@@ -42,9 +42,9 @@ def handle_message(event):
 @handler.add(PostbackEvent)
 def handle_post(event):
     texx=str(event)
-    #new = json.loads(texx)
-    #get_date= new["postback"]["params"]["datetime"].split("T")
-    #date=get_date[0]  time_data=get_date[1]
+    new = json.loads(texx)
+    date= new["postback"]["params"]["date"]
+
 
     #line_user_id=new["source"]["userId"]
     #show_database(get_date)
