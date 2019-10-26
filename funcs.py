@@ -72,7 +72,7 @@ def talk_func(line_user_id, appUserId , message):
         return "テストok"
 
 def show_database(date,place):
-    conn = pymysql.connect(
+    """conn = pymysql.connect(
     host='153.126.197.42',
     user='testuser',
     password='knct0wireless',
@@ -94,7 +94,8 @@ def show_database(date,place):
                     send=send+"\n"+r['res_time']
             return send
     finally:
-        conn.close()
+        conn.close()"""
+    return plase
 
 
     
