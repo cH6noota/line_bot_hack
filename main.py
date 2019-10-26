@@ -29,8 +29,8 @@ def callback():
 @handler.add(MessageEvent,message=TextMessage)
 def handle_message(event):
     texx=str(event)
-    
     new = json.loads(texx)
+
     #repl ユーザid　取得
     line_user_id = new["source"]["userId"]
     app_id = id_check_func(line_user_id)
@@ -42,7 +42,10 @@ def handle_message(event):
 @handler.add(PostbackEvent)
 def handle_post(event):
     texx=str(event)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=texx))
+    new = json.loads(texx)
+    get_date= new ["postback"]["params"]["datetime"]
+
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=get_date))
 
     
 if __name__=="__main__":
