@@ -31,8 +31,8 @@ def callback():
 def handle_message(event):
     texx=str(event)
     new = json.loads(texx)
-    text_1=id_check_func(new["source"]["userId"])
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text_1))
+    #text_1=id_check_func(new["source"]["userId"])
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["source"]["userId"]))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["source"]["userId"]) )
     get_mess=new["message"]["text"]
 
