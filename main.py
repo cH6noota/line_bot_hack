@@ -36,8 +36,8 @@ def handle_message(event):
     app_id = id_check_func(line_user_id)
     # 会話を取得
     send_message = talk_func(line_user_id,app_id,new["message"]["text"])
-
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_message))
+    if send_message !="non":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=send_message))
 
 @handler.add(PostbackEvent)
 def handle_post(event):
