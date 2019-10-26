@@ -48,6 +48,7 @@ def handle_post(event):
         date= '"'+new["postback"]["params"]["date"]+'"'
         line_user_id=new["source"]["userId"]
         csv_date(new["postback"]["params"]["date"], line_user_id)
+
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
         #時刻と場所から今の予約情報をメッセージに
         x3={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "時刻を選択して 下さい", "align": "center" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"Select date", "data":"action=second", "mode":"time" } } ] } } }
@@ -63,9 +64,8 @@ def handle_post(event):
         line_user_id=new["source"]["userId"]
         tt=new["postback"]["params"]["time"]
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
-
         #DB 書き込み
-        db_write()
+
 
 
     
