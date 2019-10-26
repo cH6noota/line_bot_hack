@@ -4,7 +4,9 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage
 import os
 import json
- 
+from funcs import id_check_func 
+
+
 app=Flask(__name__)
 #環境変数の取得
 YOUR_CHANNEL_ACCESS_TOKEN="zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
@@ -30,8 +32,8 @@ def handle_message(event):
     texx=str(event)
     new = json.loads(texx)
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["source"]["userId"]) )
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["message"]["text"] ))
-
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=id_check_func(new["source"]["userId"])))
+    get_mess=new["message"]["text"]
 
     
 if __name__=="__main__":
