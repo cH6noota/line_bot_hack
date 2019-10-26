@@ -27,7 +27,7 @@ def talk_func(line_user_id, appUserId , message):
 
     r = requests.post(url,headers=header, json=body)
     data = json.loads(r.text)["systemText"]['expression']
-    if len(data.split("%%"))>0:
+    if len(data.split("%%"))>1:
         data=data.split("%%")
         send=""
         for i in data:
@@ -45,4 +45,11 @@ def talk_func(line_user_id, appUserId , message):
         url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&date="+message
         r = requests.get(url)
         return "時間"
+
+def show_database(get_date):
+    date=get_date
+
+
+    
+
 
