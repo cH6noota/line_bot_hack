@@ -29,8 +29,8 @@ def callback():
 def handle_message(event):
     texx=str(event)
     new = json.loads(texx)
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["source"]["userId"]) )
-     
+    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["source"]["userId"]) )
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text=new["message"]["text"] ))
 
 
     
