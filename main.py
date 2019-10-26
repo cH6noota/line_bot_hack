@@ -4,7 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage
 import os
 import json
-from funcs import id_check_func 
+#from funcs import id_check_func 
 
 
 app=Flask(__name__)
