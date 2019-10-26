@@ -1,7 +1,7 @@
 import pandas as pd
 import requests
 import json
-
+import pymysql.cursors
 
 
 
@@ -71,8 +71,30 @@ def talk_func(line_user_id, appUserId , message):
     else:
         return "テストok"
 
-def show_database(date,plase):
-    print()
+def show_database(date,place):
+    conn = pymysql.connect(
+    host='153.126.197.42',
+    user='testuser',
+    password='knct0wireless',
+    db='kumamon5',
+    charset='utf8',
+    cursorclass=pymysql.cursors.DictCursor
+    )
+
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT res_time FROM pre_reserve where res_date =" + date + " and place =" + place
+            cursor.execute(sql, ())
+            result = cursor.fetchall()
+            send=""
+            for r in result:
+                if send=="":
+                    send=r['res_time']
+                else:
+                    send=send+"\n"+r['res_time']
+            return send
+    finally:
+        conn.close()
 
 
     
