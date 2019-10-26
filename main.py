@@ -4,7 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage,PostbackEvent
 import os
 import json
-from funcs import id_check_func ,talk_func ,show_database
+from funcs import id_check_func ,talk_func 
 import pandas as pd
 
 app=Flask(__name__)
