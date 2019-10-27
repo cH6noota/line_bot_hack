@@ -87,7 +87,14 @@ def handle_post(event):
             token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
             head = {"Content-Type": "application/json","Authorization" :token }
             r = requests.post(url,headers =head ,json={'to':line_user_id,'messages':[y]}) 
-        
+        else:
+            url="https://api.line.me/v2/bot/message/push"
+            line_user_id=new["source"]["userId"]
+            token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
+            x1={ "type": "text", "text": "その時間では予約はできません" }
+            x2=show_database(date, place)
+            head = {"Content-Type": "application/json","Authorization" :token }
+            r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2]})
 
     
 if __name__=="__main__":
