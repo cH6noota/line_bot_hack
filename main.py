@@ -48,7 +48,7 @@ def handle_post(event):
     if new["postback"]["data"]=="action=first":
         now = datetime.datetime.now() + datetime.timedelta(hours=9)
         r_d=datetime.datetime.strptime(new["postback"]["params"]["date"], '%Y-%m-%d')
-        if r_d > now:
+        if r_d >=now:
             date= '"'+new["postback"]["params"]["date"]+'"'
             line_user_id=new["source"]["userId"]
             csv_date(new["postback"]["params"]["date"], line_user_id)
@@ -93,8 +93,9 @@ def handle_post(event):
             token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
             x1={ "type": "text", "text": "その時間では予約はできません" }
             x2=show_database(date, place)
+            x3={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "時刻を選択して下さい", "align": "center", "color": "#221815" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"時刻を選択", "data":"action=second", "mode":"time" },"color": "#E5370A", "height": "md", "style": "primary" } ] } } }
             head = {"Content-Type": "application/json","Authorization" :token }
-            r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2]})
+            r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2,x3]})
 
     
 if __name__=="__main__":
