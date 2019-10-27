@@ -62,7 +62,14 @@ def handle_post(event):
             token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
             head = {"Content-Type": "application/json","Authorization" :token }
             r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2,x3]})
-        
+        else :
+            url="https://api.line.me/v2/bot/message/push"
+            token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
+            head = {"Content-Type": "application/json","Authorization" :token } 
+            x1={ "type": "text", "text": "正しい日付を洗濯してください" }
+            x2={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "日付を選択してください", "align": "center", "color": "#221815" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"日付を選択", "data":"action=first", "mode":"date" },"color": "#E5370A", "height": "md", "style": "primary" } ] } } }
+            r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2]})
+
     elif new["postback"]["data"]=="action=second":
 
         line_user_id=new["source"]["userId"]
