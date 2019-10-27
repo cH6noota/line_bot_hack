@@ -82,10 +82,14 @@ def talk_func(line_user_id, appUserId , message):
         url="https://api.line.me/v2/bot/message/push"
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
         head = {"Content-Type": "application/json","Authorization" :token }
-        xx={ "type": "text", "text": "悩みを受け取りました"}
+        xx={ "type": "text", "text": "お悩みをメッセージでください" }
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[xx]})
-        
-
+    elif data=="nayami_get": 
+        url="https://api.line.me/v2/bot/message/push"
+        token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
+        head = {"Content-Type": "application/json","Authorization" :token }
+        xx={ "type": "text", "text": "ありがとうございます。\nこの情報は皆様の支援のために利用されます。" }
+        r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[xx]})
     else:
         return "テストok"
 
