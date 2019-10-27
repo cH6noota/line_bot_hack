@@ -203,7 +203,9 @@ def checker(num ,date ,place):
             for h in h_list:
                 if h==num:
                     return False
-    return True
+    finally:
+        conn.close()
+        return True
 
 
 
