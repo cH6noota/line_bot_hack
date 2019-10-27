@@ -7,12 +7,12 @@ import random
 
 
 def create_pass(line_user_id):
-    passwd = str(random.randint(1000000,3000000))[1:5]
+    passwd = str(random.randint(1000000,3000000))[1:4]
     #サーバにget書き込み
     url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/pass/pass.php?line_user_id="+line_user_id+"&passwd="+passwd
     r = requests.get(url)
     return passwd
-    
+
 def id_check_func(line_user_id):
     df = pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/user_data.csv",encoding="SHIFT-JIS")
     i=0
@@ -70,14 +70,16 @@ def talk_func(line_user_id, appUserId , message):
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[y]})
         return "non"
     elif data=="dbwrite":
-        print("DB書き込み")
+        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/final_insert.php "
+        r = requests.get(url)
+
         x=create_pass(line_user_id)
         url="https://api.line.me/v2/bot/message/push"
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
         head = {"Content-Type": "application/json","Authorization" :token }
         xx={ "type": "text", "text": "パスワードはこの数字です\n"+x }
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[xx]})
-
+        
         
 
     else:
