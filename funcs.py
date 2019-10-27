@@ -90,6 +90,7 @@ def talk_func(line_user_id, appUserId , message):
         head = {"Content-Type": "application/json","Authorization" :token }
         xx={ "type": "text", "text": "ありがとうございます。\nこの情報は皆様の支援のために利用されます。" }
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[xx]})
+        mental_db(message,line_user_id, 21)
     else:
         return "テストok"
 
@@ -159,6 +160,22 @@ def db_write (line_user_id, place ,date,tt):
     finally:
         conn.close()
 
+def mental_db(message ,line_user_id ,place):
+    conn = pymysql.connect(
+        host='153.126.197.42',
+        user='testuser',
+        password='knct0wireless',
+        db='kumamon5',
+        charset='utf8',
+        cursorclass=pymysql.cursors.DictCursor
+    )
+    try:
+        with conn.cursor() as cursor:
+            sql = "INSERT INTO mental_data (user_id, message, place) VALUES (%s, %s, %s)"
+            cursor.execute(sql, (line_user_id, message ,place))
+        conn.commit()
+    finally:
+        conn.close()
 
 
 
