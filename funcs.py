@@ -177,5 +177,33 @@ def mental_db(message ,line_user_id ,place):
     finally:
         conn.close()
 
+def checker(num ,date ,place):
+    if num==0 or num==1 or num==2 or num==3 or num==4 or num==5 or num==6 or num==7 or num==8:
+        return False
+    conn = pymysql.connect(
+    host='153.126.197.42',
+    user='testuser',
+    password='knct0wireless',
+    db='kumamon5',
+    charset='utf8',
+    cursorclass=pymysql.cursors.DictCursor
+    )
+
+    try:
+        with conn.cursor() as cursor:
+            sql = "SELECT res_time FROM pre_reserve where res_date =" + date + " and place =" + place
+            cursor.execute(sql, ())
+            result = cursor.fetchall()
+            box=""
+            h_list=[]
+            ans =[]
+            for r in result:
+                t = datetime.datetime.strptime(r['res_time'], '%H:%M')
+                h_list.append(t.hour)
+            for h in h_list:
+                if h==num:
+                    return False
+    return True
+
 
 

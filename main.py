@@ -4,7 +4,7 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent,TextMessage,TextSendMessage,PostbackEvent
 import os
 import json
-from funcs import id_check_func ,talk_func ,show_database,csv_date,db_write
+from funcs import id_check_func ,talk_func ,show_database,csv_date,db_write ,checker
 import pandas as pd
 import requests
 import datetime
@@ -75,19 +75,18 @@ def handle_post(event):
 
         line_user_id=new["source"]["userId"]
         tt=new["postback"]["params"]["time"]
-        tt = datetime.datetime.strptime(tt, '%H:%M').strftime('%H:00')
-          
-
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
         date =pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[1]
-        #DB 書き込み
-        db_write(line_user_id, place ,date,tt)
-        #予約かくにんメッセ
-        y={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "hero": { "type": "image", "url": "https://kn46itblog.com/static/yoyaku.png", "size": "full", "aspectRatio": "20:13", "aspectMode": "fit" }, "body": { "type": "box", "layout": "vertical", "contents": [ { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "ご予約ありがとうございます。", "margin": "xl", "align": "start", "gravity": "top", "color": "#E5370A" }, { "type": "spacer" } ] }, { "type": "text", "text": "ピカチュウとお話ししましょう！", "align": "start", "weight": "bold" }, { "type": "separator", "margin": "md", "color": "#D8D7D6" }, { "type": "box", "layout": "horizontal", "margin": "lg", "contents": [ { "type": "text", "text": date, "margin": "xxl", "color": "#969696" }, { "type": "text", "text": tt, "margin": "xl", "align": "end", "color": "#969696" } ] } ] } } }
-        url="https://api.line.me/v2/bot/message/push"
-        token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
-        head = {"Content-Type": "application/json","Authorization" :token }
-        r = requests.post(url,headers =head ,json={'to':line_user_id,'messages':[y]}) 
+        if checker(datetime.datetime.strptime(tt, '%H:%M').strftime('%H') ,date,place ):
+            tt = datetime.datetime.strptime(tt, '%H:%M').strftime('%H:00')
+            #DB 書き込み
+            db_write(line_user_id, place ,date,tt)
+            #予約かくにんメッセ
+            y={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "hero": { "type": "image", "url": "https://kn46itblog.com/static/yoyaku.png", "size": "full", "aspectRatio": "20:13", "aspectMode": "fit" }, "body": { "type": "box", "layout": "vertical", "contents": [ { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "ご予約ありがとうございます。", "margin": "xl", "align": "start", "gravity": "top", "color": "#E5370A" }, { "type": "spacer" } ] }, { "type": "text", "text": "ピカチュウとお話ししましょう！", "align": "start", "weight": "bold" }, { "type": "separator", "margin": "md", "color": "#D8D7D6" }, { "type": "box", "layout": "horizontal", "margin": "lg", "contents": [ { "type": "text", "text": date, "margin": "xxl", "color": "#969696" }, { "type": "text", "text": tt, "margin": "xl", "align": "end", "color": "#969696" } ] } ] } } }
+            url="https://api.line.me/v2/bot/message/push"
+            token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
+            head = {"Content-Type": "application/json","Authorization" :token }
+            r = requests.post(url,headers =head ,json={'to':line_user_id,'messages':[y]}) 
         
 
     
