@@ -72,7 +72,12 @@ def handle_post(event):
         #DB 書き込み
         db_write(line_user_id, place ,date,tt)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="予約が完了しました！"))
-
+        #予約かくにんメッセ
+        y={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "body": { "type": "box", "layout": "vertical", "contents": [ { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "予約が完了しました", "margin": "xl", "align": "start", "gravity": "top", "color": "#E5370A" }, { "type": "spacer" } ] }, { "type": "text", "text": "ピカチュウとお話ししましょう！", "align": "start", "weight": "bold" }, { "type": "separator", "margin": "md", "color": "#D8D7D6" }, { "type": "box", "layout": "horizontal", "margin": "lg", "contents": [ { "type": "text", "text": date, "margin": "xxl", "color": "#969696" }, { "type": "text", "text": tt, "margin": "xl", "align": "end", "color": "#969696" } ] } ] } } }
+        url="https://api.line.me/v2/bot/message/push"
+        token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
+        head = {"Content-Type": "application/json","Authorization" :token }
+        r = requests.post(url,headers =head ,json={'to':line_user_id,'messages':[y]}) 
 
     
 if __name__=="__main__":
