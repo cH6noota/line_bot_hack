@@ -70,7 +70,7 @@ def talk_func(line_user_id, appUserId , message):
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[y]})
         return "non"
     elif data=="dbwrite":
-        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/final_insert.php "
+        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/final_insert.php"
         r = requests.get(url)
 
         x=create_pass(line_user_id)
