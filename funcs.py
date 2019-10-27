@@ -70,9 +70,8 @@ def talk_func(line_user_id, appUserId , message):
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[y]})
         return "non"
     elif data=="dbwrite":
-        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/final_insert.php "
+        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/final_insert.php"
         r = requests.get(url)
-
         x=create_pass(line_user_id)
         url="https://api.line.me/v2/bot/message/push"
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
