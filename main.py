@@ -67,7 +67,7 @@ def handle_post(event):
             line_user_id=new["source"]["userId"]
             token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
             head = {"Content-Type": "application/json","Authorization" :token } 
-            x1={ "type": "text", "text": "正しい日付を洗濯してください" }
+            x1={ "type": "text", "text": "正しい日付を選択してください" }
             x2={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "日付を選択してください", "align": "center", "color": "#221815" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"日付を選択", "data":"action=first", "mode":"date" },"color": "#E5370A", "height": "md", "style": "primary" } ] } } }
             r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2]})
 
@@ -83,7 +83,7 @@ def handle_post(event):
         #DB 書き込み
         db_write(line_user_id, place ,date,tt)
         #予約かくにんメッセ
-        y={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "body": { "type": "box", "layout": "vertical", "contents": [ { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "予約が完了しました", "margin": "xl", "align": "start", "gravity": "top", "color": "#E5370A" }, { "type": "spacer" } ] }, { "type": "text", "text": "ピカチュウとお話ししましょう！", "align": "start", "weight": "bold" }, { "type": "separator", "margin": "md", "color": "#D8D7D6" }, { "type": "box", "layout": "horizontal", "margin": "lg", "contents": [ { "type": "text", "text": date, "margin": "xxl", "color": "#969696" }, { "type": "text", "text": tt, "margin": "xl", "align": "end", "color": "#969696" } ] } ] } } }
+        y={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "hero": { "type": "image", "url": "https://kn46itblog.com/static/yoyaku.png", "size": "full", "aspectRatio": "20:13", "aspectMode": "fit" }, "body": { "type": "box", "layout": "vertical", "contents": [ { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "ご予約ありがとうございます。", "margin": "xl", "align": "start", "gravity": "top", "color": "#E5370A" }, { "type": "spacer" } ] }, { "type": "text", "text": "ピカチュウとお話ししましょう！", "align": "start", "weight": "bold" }, { "type": "separator", "margin": "md", "color": "#D8D7D6" }, { "type": "box", "layout": "horizontal", "margin": "lg", "contents": [ { "type": "text", "text": date, "margin": "xxl", "color": "#969696" }, { "type": "text", "text": time, "margin": "xl", "align": "end", "color": "#969696" } ] } ] } } }
         url="https://api.line.me/v2/bot/message/push"
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
         head = {"Content-Type": "application/json","Authorization" :token }
