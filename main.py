@@ -52,7 +52,7 @@ def handle_post(event):
 
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
         #時刻と場所から今の予約情報をメッセージに
-        x3={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "時刻を選択して 下さい", "align": "center" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"Select date", "data":"action=second", "mode":"time" } } ] } } }
+        x3={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "時刻を選択して下さい", "align": "center", "color": "#221815" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"時刻を選択", "data":"action=second", "mode":"time" },"color": "#E5370A", "height": "md", "style": "primary" } ] } } }
         x2=show_database(date, place)
         x1={'type': 'text', 'text':"以下の時間で予約可能です"}
         url="https://api.line.me/v2/bot/message/push"
