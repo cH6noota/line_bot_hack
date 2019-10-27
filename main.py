@@ -46,7 +46,7 @@ def handle_post(event):
     texx=str(event)
     new = json.loads(texx)
     if new["postback"]["data"]=="action=first":
-        now = datetime.datetime.now() + datetime.timedelta(hours=9)
+        now = datetime.datetime.now() + datetime.timedelta(hours=-13)
         r_d=datetime.datetime.strptime(new["postback"]["params"]["date"], '%Y-%m-%d')
         if r_d >=now:
             date= '"'+new["postback"]["params"]["date"]+'"'
