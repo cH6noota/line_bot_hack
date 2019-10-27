@@ -65,7 +65,7 @@ def handle_post(event):
         line_user_id=new["source"]["userId"]
         tt=new["postback"]["params"]["time"]
         tt = datetime.datetime.strptime(tt, '%H:%M').strftime('%H:00')
-
+            
 
         place=pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[0]
         date =pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[1]
