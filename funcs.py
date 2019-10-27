@@ -192,6 +192,7 @@ def checker(num ,date ,place):
 
     try:
         with conn.cursor() as cursor:
+            date= '"'+date+'"'
             sql = "SELECT res_time FROM pre_reserve where res_date =" + date + " and place =" + place
             cursor.execute(sql, ())
             result = cursor.fetchall()
@@ -202,7 +203,7 @@ def checker(num ,date ,place):
                 t = datetime.datetime.strptime(r['res_time'], '%H:%M')
                 h_list.append(t.hour)
             for h in h_list:
-                if h==str(num):
+                if h==num:
                     return False
         return True
     finally:
