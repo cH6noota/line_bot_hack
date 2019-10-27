@@ -48,7 +48,9 @@ def talk_func(line_user_id, appUserId , message):
                 send=send+i
             else:
                 send=send+"\n"+i
-        return send
+        dt_now = datetime.datetime.now()
+        ddd=dt_now.strftime('%Y年%m月%d日 %H:%M:%S')
+        return send+ddd
     if data=="場所ok":
         #一時保管用 CSV
         url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&plase="+message

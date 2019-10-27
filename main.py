@@ -22,13 +22,12 @@ def callback():
     
     body=request.get_data(as_text=True)
     app.logger.info("Request body"+body)
-    dt_now = datetime.datetime.now()
 
     try:
         handler.handle(body,signature)
     except InvalidSignatureError:
         abort(400)
-    return dt_now.strftime("%Y-%m-%d")
+    return "ok"
 
 @handler.add(MessageEvent,message=TextMessage)
 def handle_message(event):
