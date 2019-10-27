@@ -57,7 +57,7 @@ def talk_func(line_user_id, appUserId , message):
         token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
         head = {"Content-Type": "application/json","Authorization" :token } 
         x1={ "type": "text", "text": "地点登録が完了しました" }
-        x2={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "予約日を決定する", "align": "center", "color": "#221815" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"日付選択", "data":"action=first", "mode":"datetime" }, "color": "#E5370A", "height": "md", "style": "primary" } ] } } }
+        x2={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "header": { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "Header", "align": "center" } ] }, "footer": { "type": "box", "layout": "horizontal", "contents": [ { "type": "button", "action": { "type":"datetimepicker", "label":"Select date", "data":"action=first", "mode":"date" } } ] } } }
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[x1,x2]})
         return "non"
     elif data=="予約ok":
@@ -70,7 +70,7 @@ def talk_func(line_user_id, appUserId , message):
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[y]})
         return "non"
     elif data=="dbwrite":
-        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/final_insert.php"
+        url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/final_insert.php "
         r = requests.get(url)
 
         x=create_pass(line_user_id)
