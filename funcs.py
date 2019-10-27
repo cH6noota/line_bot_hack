@@ -50,6 +50,7 @@ def talk_func(line_user_id, appUserId , message):
                 send=send+"\n"+i
         dt_now = datetime.datetime.now()
         ddd=dt_now.strftime('%Y年%m月%d日 %H:%M:%S')
+        ddd = ddd + datetime.timedelta(hours=9)
         return send+ddd
     if data=="場所ok":
         #一時保管用 CSV
