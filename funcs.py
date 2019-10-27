@@ -48,10 +48,7 @@ def talk_func(line_user_id, appUserId , message):
                 send=send+i
             else:
                 send=send+"\n"+i
-        dt_now = datetime.datetime.now()
-        ddd=dt_now.strftime('%Y年%m月%d日 %H:%M:%S')
-        ddd = ddd + datetime.timedelta(hours=9)
-        return send+ddd
+        return send
     if data=="場所ok":
         #一時保管用 CSV
         url ="http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/form_data1.php?line_user_id="+line_user_id+"&plase="+message
@@ -81,7 +78,12 @@ def talk_func(line_user_id, appUserId , message):
         head = {"Content-Type": "application/json","Authorization" :token }
         xx={ "type": "text", "text": "パスワードはこの数字です\n"+x }
         r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[xx]})
-        
+    elif data="nayami":
+        url="https://api.line.me/v2/bot/message/push"
+        token="Bearer zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
+        head = {"Content-Type": "application/json","Authorization" :token }
+        xx={ "type": "text", "text": "悩みを受け取りました"}
+        r = requests.post(url,headers =head ,json={'to':line_user_id ,'messages':[xx]})
         
 
     else:
