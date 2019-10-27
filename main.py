@@ -19,15 +19,16 @@ handler=WebhookHandler(YOUR_CHANNEL_SECRET)
 @app.route("/callback",methods=["POST"])
 def callback():
     signature=request.headers["X-Line-Signature"]
-
+    
     body=request.get_data(as_text=True)
     app.logger.info("Request body"+body)
+    dt_now = datetime.datetime.now()
 
     try:
         handler.handle(body,signature)
     except InvalidSignatureError:
         abort(400)
-    return "OK"
+    return dt_now.strftime("%Y-%m-%d")
 
 @handler.add(MessageEvent,message=TextMessage)
 def handle_message(event):
@@ -71,7 +72,6 @@ def handle_post(event):
         date =pd.read_csv("http://ik1-334-27288.vs.sakura.ne.jp/hack10/form/"+line_user_id+".csv" ,encoding="UTF").columns[1]
         #DB 書き込み
         db_write(line_user_id, place ,date,tt)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="予約が完了しました！"))
         #予約かくにんメッセ
         y={ "type": "flex", "altText": "Flex Message", "contents": { "type": "bubble", "direction": "ltr", "body": { "type": "box", "layout": "vertical", "contents": [ { "type": "box", "layout": "vertical", "contents": [ { "type": "text", "text": "予約が完了しました", "margin": "xl", "align": "start", "gravity": "top", "color": "#E5370A" }, { "type": "spacer" } ] }, { "type": "text", "text": "ピカチュウとお話ししましょう！", "align": "start", "weight": "bold" }, { "type": "separator", "margin": "md", "color": "#D8D7D6" }, { "type": "box", "layout": "horizontal", "margin": "lg", "contents": [ { "type": "text", "text": date, "margin": "xxl", "color": "#969696" }, { "type": "text", "text": tt, "margin": "xl", "align": "end", "color": "#969696" } ] } ] } } }
         url="https://api.line.me/v2/bot/message/push"
