@@ -10,9 +10,9 @@ import requests
 import datetime
 
 app=Flask(__name__)
-#環境変数の取得
-YOUR_CHANNEL_ACCESS_TOKEN="zwG2YHzlm8WNyiL1+uApTaUfqplmKV5lWrY/h/yxotjecGtli0p6LeuvG7oygEgVriAq/HsAxs0jwSSSj08/En3DH8yWeSWe5/5PBcMqhXDSe6xJBpDRuMyW35afkhu7+gT/jEbzSN7b95jA01hMWQdB04t89/1O/w1cDnyilFU="
-YOUR_CHANNEL_SECRET="901848e5ad6dc80b58b18ed866f44b27"
+#Line 
+#YOUR_CHANNEL_ACCESS_TOKEN=
+#YOUR_CHANNEL_SECRET=
 line_bot_api=LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler=WebhookHandler(YOUR_CHANNEL_SECRET)
 
